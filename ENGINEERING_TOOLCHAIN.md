@@ -95,3 +95,10 @@ The canonical `Human_Powers.md` taxonomy is preserved. This separate public tool
 - [Validation record](https://github.com/C2O-Chaos-to-Order/The-UNIVERSALIS-Human-Powers/blob/implementation/repository-foundation-2026-11-12/HUMAN_POWERS_VALIDATION.md)
 
 The consent algebra combines restrictions monotonically; provenance distinguishes all-of from any-of dependencies; human approvals are action- and time-bound. AT1C current materials name ML-DSA-65, so the portable receipt supports algorithm identification and exact verifier policy rather than assuming Ed25519 only. The a11y-toolkit count discrepancy (31 vs 32) remains unresolved. Automated accessibility results are not blanket conformance proof. Augmentation artifacts require device-specific safety case, calibration, hardware interlock, tested emergency stop and human approval; no live actuation is implemented.
+
+
+## Security and Cybersecurity — eleventh owner-supplied source — 2026-11-12
+
+Canonical public architecture: [UNIVERSALIS Security and Cybersecurity](https://github.com/C2O-Chaos-to-Order/The-UNIVERSALIS-Ecosystem/blob/implementation/repository-foundation-2026-11-12/SECURITY_CYBERSECURITY_ARCHITECTURE.md). The public security contract, synthetic fixtures and validation evidence are linked from that architecture. The [UNIVERSALIS eleven-source master toolchain register](https://github.com/C2O-Chaos-to-Order/Research-for-the-UNIVERSALIS-Ecosystem/blob/implementation/repository-foundation-2026-11-12/TOOLCHAIN_COVERAGE_REGISTER.md) preserves candidate provenance, verification caveats and integration limits.
+
+Public repositories contain only portable contracts and synthetic examples: no C2O-private policies, keys, incident data, authority records or target inventories. External security tools remain candidates until source, license, release, data flow, platform and enforcement behavior are reviewed. No security product or offensive assessment system is claimed integrated.
