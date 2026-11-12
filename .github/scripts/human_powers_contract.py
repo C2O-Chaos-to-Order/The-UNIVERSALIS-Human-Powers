@@ -6,7 +6,7 @@ from jsonschema import Draft202012Validator
 ROOT=Path(__file__).resolve().parents[2]
 SCHEMA=json.loads((ROOT/"schemas/human-powers/human-authority-contracts.v1.schema.json").read_text())
 FIX=json.loads((ROOT/"examples/human_powers/human-authority-contracts.v1.json").read_text())
-KEYS={"consent_graph":"consentGraph","consent_label_join":"consentLabelJoin","human_approval_receipt":"humanApprovalReceipt","accessibility_evidence_pack":"accessibilityEvidencePack","sovereignty_profile":"sovereigntyProfile","augmentation_device_profile":"augmentationDeviceProfile","augmentation_action_record":"augmentationActionRecord","consent_revocation_event":"consentRevocationEvent"}
+KEYS={"consent_graph":"consentGraph","consent_label_join":"consentLabelJoin","human_approval_receipt":"humanApprovalReceipt","accessibility_evidence_pack":"accessibilityEvidencePack","sovereignty_profile":"sovereigntyProfile","augmentation_device_profile":"augmentationDeviceProfile","augmentation_action_record":"augmentationActionRecord","consent_revocation_event":"consentRevocationEvent","data_subject_rights_request":"dataSubjectRightsRequest"}
 def valid(k,obj):
  s={"$schema":SCHEMA["$schema"],"$ref":"#/$defs/"+KEYS[k],"$defs":SCHEMA["$defs"]}
  Draft202012Validator.check_schema(s); Draft202012Validator(s).validate(obj)
@@ -34,6 +34,7 @@ def main():
  x=copy.deepcopy(FIX); x["consent_graph"]["grants"][0]["mode"]="unrestricted"; neg.append(("consent grant mode","consent_graph",x))
  x=copy.deepcopy(FIX); x["sovereignty_profile"]["data_control"]["storage_control"]="unknown-value"; neg.append(("data control enum","sovereignty_profile",x))
  x=copy.deepcopy(FIX); x["consent_revocation_event"]["propagation_status"]="done"; neg.append(("revocation state enum","consent_revocation_event",x))
+ x=copy.deepcopy(FIX); x["data_subject_rights_request"]["request_type"]="erase-all-now"; neg.append(("data-subject request type","data_subject_rights_request",x))
  for label,k,obj in neg:
   try: valid(k,obj)
   except Exception: continue
