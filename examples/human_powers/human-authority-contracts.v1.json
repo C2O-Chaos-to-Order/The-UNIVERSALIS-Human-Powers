@@ -129,7 +129,11 @@
     "consent_graph_ref": "fixture://consent/graph",
     "privacy_preferences_ref": "fixture://privacy/preferences",
     "issued_at": "2026-11-12T16:05:00Z",
-    "fixture_only": true
+    "fixture_only": true,
+    "rights_request_refs": [
+      "fixture://rights/request-01"
+    ],
+    "dsar_profile_ref": "fixture://rights/dsar-profile"
   },
   "augmentation_device_profile": {
     "schema_version": "1.0.0",
@@ -175,6 +179,26 @@
       "fixture://derived/01"
     ],
     "propagation_status": "pending",
+    "fixture_only": true
+  },
+  "data_subject_rights_request": {
+    "schema_version": "1.0.0",
+    "request_id": "rights-request-fixture-01",
+    "subject_ref": "subject:fixture-01",
+    "request_type": "access",
+    "data_scope": [
+      "synthetic-data:example"
+    ],
+    "submitted_at": "2026-11-12T16:10:00Z",
+    "status": "received",
+    "response_due_at": "2026-11-13T16:10:00Z",
+    "decision_ref": "fixture://rights/decision",
+    "evidence_refs": [
+      "fixture://rights/receipt"
+    ],
+    "limitations": [
+      "Synthetic example only; no legal response or GDPR compliance is asserted."
+    ],
     "fixture_only": true
   }
 }
