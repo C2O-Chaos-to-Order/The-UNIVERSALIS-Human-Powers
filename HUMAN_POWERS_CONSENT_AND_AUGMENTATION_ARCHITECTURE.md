@@ -31,7 +31,7 @@ All named third-party projects remain candidates until canonical identity, licen
 - Consent-label join algebra: combining restrictions cannot reduce the restrictions of either input.
 - Provenance expression using all-of / any-of branches, so withdrawal and correction propagation can be independently evaluated without exporting a private consent store.
 - Human-approval receipt bound to one approver, requesting agent, action, target, purpose, scope, evidence, time window, nonce, signature and trust reference.
-- Accessibility evidence pack with WCAG 2.2 criterion-level evidence, assessment method, limitations and human review/countersign state.
+- Accessibility evidence pack with WCAG 2.2 criterion-level evidence, assessment method, limitations, human review/countersign state, optional compliance matrix and VPAT 2.5 draft references.
 - Sovereignty profile using a portable credential or native record with subject-controlled data preferences and export/revocation references.
 - Augmentation device/action evidence records linked to a device-specific safety case, calibration, hardware interlock, emergency-stop test, wearer consent and action-specific approval.
 
