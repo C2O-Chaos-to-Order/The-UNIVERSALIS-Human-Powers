@@ -32,3 +32,14 @@ The Markdown file is the canonical text. The `.docx` is a convenience companion.
 | [The-UNIVERSALIS-Intelligence-Powers](https://github.com/C2O-Chaos-to-Order/The-UNIVERSALIS-Intelligence-Powers) | Intelligence Powers (I-P) |
 | [The-UNIVERSALIS-Ontology](https://github.com/C2O-Chaos-to-Order/The-UNIVERSALIS-Ontology) | Master Ontology: Human and Intelligence |
 | [The-UNIVERSALIS-Encyclopedias](https://github.com/C2O-Chaos-to-Order/The-UNIVERSALIS-Encyclopedias) | Public encyclopedia placeholder (no commits as of the 2026-11-10 inventory) |
+
+
+## Human Powers consent and oversight toolchain
+
+The canonical `Human_Powers.md` H-P-01–H-P-12 taxonomy remains unchanged. This implementation branch adds portable consent graphs, restriction composition, consent provenance, human-approval receipts, accessibility evidence packs, sovereignty profiles and augmentation safety evidence.
+
+- [Open consent and augmentation architecture](https://github.com/C2O-Chaos-to-Order/The-UNIVERSALIS-Human-Powers/blob/implementation/repository-foundation-2026-11-12/HUMAN_POWERS_CONSENT_AND_AUGMENTATION_ARCHITECTURE.md)
+- [Portable human-authority schema family](https://github.com/C2O-Chaos-to-Order/The-UNIVERSALIS-Human-Powers/tree/implementation/repository-foundation-2026-11-12/schemas/human-powers)
+- [Validation record](https://github.com/C2O-Chaos-to-Order/The-UNIVERSALIS-Human-Powers/blob/implementation/repository-foundation-2026-11-12/HUMAN_POWERS_VALIDATION.md)
+
+This public implementation contains no C2O-private consent records, PII, policy values, permits, signing keys, authority tokens or operational evidence.
