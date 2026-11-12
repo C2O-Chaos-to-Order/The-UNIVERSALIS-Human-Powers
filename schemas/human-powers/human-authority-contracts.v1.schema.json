@@ -491,6 +491,13 @@
         },
         "fixture_only": {
           "type": "boolean"
+        },
+        "compliance_matrix_ref": {
+          "type": "string"
+        },
+        "vpat_draft_ref": {
+          "type": "string",
+          "description": "Optional Voluntary Product Accessibility Template draft reference; not a conformance determination."
         }
       },
       "required": [
@@ -576,6 +583,15 @@
         },
         "fixture_only": {
           "type": "boolean"
+        },
+        "rights_request_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "dsar_profile_ref": {
+          "type": "string"
         }
       },
       "required": [
@@ -788,6 +804,87 @@
         "recorded_at",
         "affected_derived_refs",
         "propagation_status",
+        "fixture_only"
+      ],
+      "additionalProperties": false
+    },
+    "dataSubjectRightsRequest": {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "const": "1.0.0"
+        },
+        "request_id": {
+          "type": "string"
+        },
+        "subject_ref": {
+          "type": "string"
+        },
+        "request_type": {
+          "enum": [
+            "access",
+            "rectification",
+            "erasure",
+            "restriction",
+            "portability",
+            "objection",
+            "consent-withdrawal"
+          ]
+        },
+        "data_scope": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1
+        },
+        "submitted_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "response_due_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "status": {
+          "enum": [
+            "received",
+            "identity-check-pending",
+            "in-progress",
+            "fulfilled",
+            "partially-fulfilled",
+            "denied",
+            "withdrawn"
+          ]
+        },
+        "decision_ref": {
+          "type": "string"
+        },
+        "evidence_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "limitations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "fixture_only": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "schema_version",
+        "request_id",
+        "subject_ref",
+        "request_type",
+        "data_scope",
+        "submitted_at",
+        "status",
+        "evidence_refs",
         "fixture_only"
       ],
       "additionalProperties": false
