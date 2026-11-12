@@ -200,5 +200,54 @@
       "Synthetic example only; no legal response or GDPR compliance is asserted."
     ],
     "fixture_only": true
+  },
+  "hardware_control_profile": {
+    "schema_version": "1.0.0",
+    "control_profile_id": "control-profile-fixture-01",
+    "device_class": "exoskeleton",
+    "device_ref": "fixture://device/exoskeleton-not-connected",
+    "hardware_component_refs": [
+      "fixture://hardware/controller",
+      "fixture://hardware/actuator"
+    ],
+    "control_interface_version": "synthetic-0.0",
+    "command_schema_ref": "fixture://schema/openexo-command",
+    "parameter_schema_ref": "fixture://schema/command-parameters",
+    "units_profile_ref": "fixture://units/si",
+    "failsafe_behavior": "stop-motion",
+    "watchdog_required": true,
+    "watchdog_profile_ref": "fixture://watchdog/not-run",
+    "hardware_interlock_required": true,
+    "interlock_test_ref": "fixture://interlock/not-run",
+    "emergency_stop_command_ref": "fixture://estop/command",
+    "emergency_stop_test_ref": "fixture://estop/not-run",
+    "device_safety_case_ref": "fixture://safety-case/not-validated",
+    "calibration_evidence_ref": "fixture://calibration/not-run",
+    "validated_by_ref": "fixture-only",
+    "fixture_only": true
+  },
+  "ems_action_record": {
+    "schema_version": "1.0.0",
+    "action_record_id": "ems-action-fixture-01",
+    "control_profile_ref": "control-profile-fixture-01",
+    "wearer_ref": "subject:fixture-01",
+    "operator_ref": "operator:fixture-01",
+    "action_class": "electrical-muscle-stimulation",
+    "stimulation_profile_ref": "fixture://ems/profile-not-validated",
+    "electrode_configuration_ref": "fixture://ems/electrodes-not-validated",
+    "parameter_schema_ref": "fixture://schema/ems-parameters",
+    "parameter_payload_sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+    "units_profile_ref": "fixture://units/ems",
+    "consent_ref": "grant-human-01",
+    "human_approval_ref": "approval-fixture-01",
+    "device_safety_case_ref": "fixture://safety-case/not-validated",
+    "calibration_evidence_ref": "fixture://calibration/not-run",
+    "hardware_interlock_state": "unknown",
+    "emergency_stop_available": true,
+    "emergency_stop_test_ref": "fixture://estop/not-run",
+    "decision": "deny",
+    "decision_at": "2026-11-12T16:15:00Z",
+    "expires_at": "2026-11-12T16:16:00Z",
+    "fixture_only": true
   }
 }
