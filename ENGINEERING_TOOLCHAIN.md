@@ -84,3 +84,14 @@ Treat every third-party name in that register as a proposed candidate/reference 
 ## Master toolchain coverage register — 2026-11-12
 
 The current public inventory for the original four toolchain documents plus the Intelligence Capabilities source is maintained in the UNIVERSALIS research register: https://github.com/C2O-Chaos-to-Order/Research-for-the-UNIVERSALIS-Ecosystem/blob/implementation/repository-foundation-2026-11-12/TOOLCHAIN_COVERAGE_REGISTER.md. It distinguishes documentation, basic contracts, passing CI, and actual integrations. This public register contains no links to C2O-private owner repositories or policy values.
+
+
+## Human Powers consent and oversight toolchain — 2026-11-12
+
+The canonical `Human_Powers.md` taxonomy is preserved. This separate public toolchain defines portable consent, approval, accessibility, sovereignty and augmentation evidence.
+
+- [UNIVERSALIS open architecture](https://github.com/C2O-Chaos-to-Order/The-UNIVERSALIS-Human-Powers/blob/implementation/repository-foundation-2026-11-12/HUMAN_POWERS_CONSENT_AND_AUGMENTATION_ARCHITECTURE.md)
+- [Shared human-authority schema](https://github.com/C2O-Chaos-to-Order/The-UNIVERSALIS-Human-Powers/blob/implementation/repository-foundation-2026-11-12/schemas/human-powers/human-authority-contracts.v1.schema.json)
+- [Validation record](https://github.com/C2O-Chaos-to-Order/The-UNIVERSALIS-Human-Powers/blob/implementation/repository-foundation-2026-11-12/HUMAN_POWERS_VALIDATION.md)
+
+The consent algebra combines restrictions monotonically; provenance distinguishes all-of from any-of dependencies; human approvals are action- and time-bound. AT1C current materials name ML-DSA-65, so the portable receipt supports algorithm identification and exact verifier policy rather than assuming Ed25519 only. The a11y-toolkit count discrepancy (31 vs 32) remains unresolved. Automated accessibility results are not blanket conformance proof. Augmentation artifacts require device-specific safety case, calibration, hardware interlock, tested emergency stop and human approval; no live actuation is implemented.
