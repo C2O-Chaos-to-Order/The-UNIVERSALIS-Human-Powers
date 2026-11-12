@@ -10,6 +10,8 @@ KEYS={"consent_graph":"consentGraph","consent_label_join":"consentLabelJoin","hu
 def valid(k,obj):
  s={"$schema":SCHEMA["$schema"],"$ref":"#/$defs/"+KEYS[k],"$defs":SCHEMA["$defs"]}
  Draft202012Validator.check_schema(s); Draft202012Validator(s).validate(obj)
+ if k=="human_approval_receipt" and obj.get("fixture_only") and obj.get("signature",{}).get("verified_status")=="verified":
+  raise ValueError("fixture-only approval signature cannot be marked verified")
 def expr_ok(expr,active):
  if expr["kind"]=="grant-ref": return expr["grant_ref"] in active
  values=[expr_ok(v,active) for v in expr["children"]]
