@@ -62,3 +62,12 @@ The shared schemas, synthetic fixtures and semantic checks provide a basic porta
 - AT1C current public repository states its SDK uses ML-DSA-65 and has retired Ed25519; receipt verification must be algorithm-agile and pin exact verifier policy: https://github.com/at1c-protocol/at1c-protocol-official
 - WCAG 2.2 is the accessibility evaluation reference; automated reports alone do not establish conformance.
 - The number of a11y-toolkit MCP tools differs across the supplied inventory versions (31 vs 32); do not present either count as verified until a specific release is pinned and inspected.
+
+
+## Dedicated hardware/control and EMS evidence contracts
+
+The shared contract registry now includes:
+- `hardwareControlProfile`: OpenExo / wearable-robotics-oriented hardware control interface metadata, command and parameter schema references, units profile, failsafe behavior, watchdog, hardware interlock, emergency-stop interface/test, device safety case and calibration references.
+- `emsActionRecord`: action-specific Electrical Muscle Stimulation record bound to a device/control profile, stimulation profile, electrode configuration, parameter-schema/digest, units profile, wearer consent, human approval, safety case, calibration, interlock and emergency-stop evidence.
+
+These records intentionally contain references and digests rather than recommended stimulation settings or device operating parameters. An allow decision is invalid without an accepted interlock state, action-specific human approval and available emergency stop. The examples are synthetic, unvalidated and deny execution; no live OpenExo, CEINMS-RT, EMS or robotic device is connected.
