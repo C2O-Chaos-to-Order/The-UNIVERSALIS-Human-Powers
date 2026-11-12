@@ -1,0 +1,797 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:c2o-universalis:human-powers:consent-contracts:1.0.0",
+  "title": "Portable Human Powers Consent and Oversight Contracts",
+  "description": "Portable consent, approval, accessibility, sovereignty and augmentation evidence. No C2O-private consent stores or authority values.",
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "signature": {
+      "type": "object",
+      "properties": {
+        "algorithm": {
+          "enum": [
+            "Ed25519",
+            "ML-DSA-65"
+          ]
+        },
+        "signer_key_ref": {
+          "type": "string"
+        },
+        "payload_sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "signature_base64": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9+/]+={0,2}$"
+        },
+        "verified_status": {
+          "enum": [
+            "not-verified",
+            "verified",
+            "rejected",
+            "revoked"
+          ]
+        },
+        "verification_profile_ref": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "algorithm",
+        "signer_key_ref",
+        "payload_sha256",
+        "signature_base64",
+        "verified_status"
+      ],
+      "additionalProperties": false
+    },
+    "consentGrant": {
+      "type": "object",
+      "properties": {
+        "grant_id": {
+          "type": "string"
+        },
+        "subject_ref": {
+          "type": "string"
+        },
+        "grantor_ref": {
+          "type": "string"
+        },
+        "agent_ref": {
+          "type": "string"
+        },
+        "action_scope": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1
+        },
+        "resource_scope": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1
+        },
+        "purposes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1
+        },
+        "data_categories": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "recipient_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "mode": {
+          "enum": [
+            "autonomous",
+            "approval-required",
+            "prohibited"
+          ]
+        },
+        "status": {
+          "enum": [
+            "granted",
+            "denied",
+            "withdrawn",
+            "expired",
+            "suspended"
+          ]
+        },
+        "issued_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "expires_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "withdrawal_ref": {
+          "type": "string"
+        },
+        "provenance_ref": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "grant_id",
+        "subject_ref",
+        "grantor_ref",
+        "agent_ref",
+        "action_scope",
+        "resource_scope",
+        "purposes",
+        "mode",
+        "status",
+        "issued_at",
+        "expires_at"
+      ],
+      "additionalProperties": false
+    },
+    "consentGraph": {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "const": "1.0.0"
+        },
+        "graph_id": {
+          "type": "string"
+        },
+        "profile_version": {
+          "type": "string"
+        },
+        "subject_ref": {
+          "type": "string"
+        },
+        "grants": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/consentGrant"
+          }
+        },
+        "revoked_grant_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "join_algebra_ref": {
+          "type": "string"
+        },
+        "provenance_root": {
+          "$ref": "#/$defs/provenanceExpression"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "fixture_only": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "schema_version",
+        "graph_id",
+        "profile_version",
+        "subject_ref",
+        "grants",
+        "revoked_grant_refs",
+        "join_algebra_ref",
+        "provenance_root",
+        "created_at",
+        "updated_at",
+        "fixture_only"
+      ],
+      "additionalProperties": false
+    },
+    "consentLabelJoin": {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "const": "1.0.0"
+        },
+        "algebra_ref": {
+          "type": "string"
+        },
+        "left_restrictions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "right_restrictions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "joined_restrictions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "operation": {
+          "const": "set-union"
+        },
+        "fixture_only": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "schema_version",
+        "algebra_ref",
+        "left_restrictions",
+        "right_restrictions",
+        "joined_restrictions",
+        "operation",
+        "fixture_only"
+      ],
+      "additionalProperties": false
+    },
+    "provenanceExpression": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "grant-ref"
+            },
+            "grant_ref": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "kind",
+            "grant_ref"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "all-of"
+            },
+            "children": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "$ref": "#/$defs/provenanceExpression"
+              }
+            }
+          },
+          "required": [
+            "kind",
+            "children"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "any-of"
+            },
+            "children": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "$ref": "#/$defs/provenanceExpression"
+              }
+            }
+          },
+          "required": [
+            "kind",
+            "children"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "humanApprovalReceipt": {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "const": "1.0.0"
+        },
+        "receipt_id": {
+          "type": "string"
+        },
+        "approver_ref": {
+          "type": "string"
+        },
+        "requesting_agent_ref": {
+          "type": "string"
+        },
+        "action": {
+          "type": "string"
+        },
+        "target_ref": {
+          "type": "string"
+        },
+        "purpose": {
+          "type": "string"
+        },
+        "scope": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1
+        },
+        "decision": {
+          "enum": [
+            "approve",
+            "deny",
+            "withdraw"
+          ]
+        },
+        "evidence_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "issued_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "expires_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "nonce": {
+          "type": "string"
+        },
+        "signature": {
+          "$ref": "#/$defs/signature"
+        },
+        "fixture_only": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "schema_version",
+        "receipt_id",
+        "approver_ref",
+        "requesting_agent_ref",
+        "action",
+        "target_ref",
+        "purpose",
+        "scope",
+        "decision",
+        "evidence_refs",
+        "issued_at",
+        "expires_at",
+        "nonce",
+        "signature",
+        "fixture_only"
+      ],
+      "additionalProperties": false
+    },
+    "accessibilityEvidencePack": {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "const": "1.0.0"
+        },
+        "pack_id": {
+          "type": "string"
+        },
+        "standard": {
+          "const": "WCAG-2.2"
+        },
+        "target_level": {
+          "enum": [
+            "A",
+            "AA",
+            "AAA"
+          ]
+        },
+        "evaluated_subject_ref": {
+          "type": "string"
+        },
+        "build_sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "evaluation_methods": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "automated",
+              "manual",
+              "assistive-technology",
+              "user-testing"
+            ]
+          },
+          "minItems": 1
+        },
+        "criteria": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "criterion_id": {
+                "type": "string"
+              },
+              "outcome": {
+                "enum": [
+                  "pass",
+                  "fail",
+                  "not-applicable",
+                  "not-tested",
+                  "needs-review"
+                ]
+              },
+              "evidence_refs": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "finding_refs": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "required": [
+              "criterion_id",
+              "outcome",
+              "evidence_refs"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "human_review_status": {
+          "enum": [
+            "not-reviewed",
+            "reviewed",
+            "countersigned"
+          ]
+        },
+        "reviewer_ref": {
+          "type": "string"
+        },
+        "review_signature": {
+          "$ref": "#/$defs/signature"
+        },
+        "limitations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "assessed_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "assessor_ref": {
+          "type": "string"
+        },
+        "fixture_only": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "schema_version",
+        "pack_id",
+        "standard",
+        "target_level",
+        "evaluated_subject_ref",
+        "build_sha256",
+        "evaluation_methods",
+        "criteria",
+        "human_review_status",
+        "limitations",
+        "assessed_at",
+        "assessor_ref",
+        "fixture_only"
+      ],
+      "additionalProperties": false
+    },
+    "sovereigntyProfile": {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "const": "1.0.0"
+        },
+        "profile_id": {
+          "type": "string"
+        },
+        "subject_ref": {
+          "type": "string"
+        },
+        "credential_format": {
+          "enum": [
+            "W3C-VC",
+            "Open-Badges",
+            "native-record"
+          ]
+        },
+        "data_control": {
+          "type": "object",
+          "properties": {
+            "storage_control": {
+              "enum": [
+                "subject-controlled",
+                "delegated",
+                "shared",
+                "unknown"
+              ]
+            },
+            "portability": {
+              "type": "boolean"
+            },
+            "export_ref": {
+              "type": "string"
+            },
+            "deletion_request_supported": {
+              "type": "boolean"
+            },
+            "retention_policy_ref": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "storage_control",
+            "portability",
+            "deletion_request_supported"
+          ],
+          "additionalProperties": false
+        },
+        "consent_graph_ref": {
+          "type": "string"
+        },
+        "privacy_preferences_ref": {
+          "type": "string"
+        },
+        "issued_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "expires_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "fixture_only": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "schema_version",
+        "profile_id",
+        "subject_ref",
+        "credential_format",
+        "data_control",
+        "issued_at",
+        "fixture_only"
+      ],
+      "additionalProperties": false
+    },
+    "augmentationDeviceProfile": {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "const": "1.0.0"
+        },
+        "device_profile_id": {
+          "type": "string"
+        },
+        "device_class": {
+          "enum": [
+            "exoskeleton",
+            "wearable-robotics",
+            "electrical-muscle-stimulation",
+            "supernumerary-robotic-finger",
+            "other"
+          ]
+        },
+        "device_ref": {
+          "type": "string"
+        },
+        "control_interface_version": {
+          "type": "string"
+        },
+        "validated_safety_case_ref": {
+          "type": "string"
+        },
+        "calibration_evidence_ref": {
+          "type": "string"
+        },
+        "hardware_interlock_required": {
+          "const": true
+        },
+        "emergency_stop_test_ref": {
+          "type": "string"
+        },
+        "allowed_parameter_schema_ref": {
+          "type": "string"
+        },
+        "validated_by_ref": {
+          "type": "string"
+        },
+        "fixture_only": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "schema_version",
+        "device_profile_id",
+        "device_class",
+        "device_ref",
+        "control_interface_version",
+        "validated_safety_case_ref",
+        "calibration_evidence_ref",
+        "hardware_interlock_required",
+        "emergency_stop_test_ref",
+        "allowed_parameter_schema_ref",
+        "validated_by_ref",
+        "fixture_only"
+      ],
+      "additionalProperties": false
+    },
+    "augmentationActionRecord": {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "const": "1.0.0"
+        },
+        "action_record_id": {
+          "type": "string"
+        },
+        "device_profile_ref": {
+          "type": "string"
+        },
+        "wearer_ref": {
+          "type": "string"
+        },
+        "operator_ref": {
+          "type": "string"
+        },
+        "action_class": {
+          "type": "string"
+        },
+        "parameter_payload_sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "consent_ref": {
+          "type": "string"
+        },
+        "human_approval_ref": {
+          "type": "string"
+        },
+        "validated_safety_case_ref": {
+          "type": "string"
+        },
+        "calibration_evidence_ref": {
+          "type": "string"
+        },
+        "hardware_interlock_state": {
+          "enum": [
+            "engaged",
+            "device-authorized",
+            "fault",
+            "unknown"
+          ]
+        },
+        "emergency_stop_available": {
+          "const": true
+        },
+        "emergency_stop_test_ref": {
+          "type": "string"
+        },
+        "decision": {
+          "enum": [
+            "allow",
+            "deny",
+            "human-confirmation-required",
+            "safety-fault"
+          ]
+        },
+        "decision_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "expires_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "fixture_only": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "schema_version",
+        "action_record_id",
+        "device_profile_ref",
+        "wearer_ref",
+        "operator_ref",
+        "action_class",
+        "parameter_payload_sha256",
+        "consent_ref",
+        "human_approval_ref",
+        "validated_safety_case_ref",
+        "calibration_evidence_ref",
+        "hardware_interlock_state",
+        "emergency_stop_available",
+        "emergency_stop_test_ref",
+        "decision",
+        "decision_at",
+        "expires_at",
+        "fixture_only"
+      ],
+      "additionalProperties": false
+    },
+    "consentRevocationEvent": {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "const": "1.0.0"
+        },
+        "revocation_id": {
+          "type": "string"
+        },
+        "grant_ref": {
+          "type": "string"
+        },
+        "reason_code": {
+          "type": "string"
+        },
+        "recorded_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "affected_derived_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "propagation_status": {
+          "enum": [
+            "pending",
+            "in-progress",
+            "complete",
+            "failed"
+          ]
+        },
+        "fixture_only": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "schema_version",
+        "revocation_id",
+        "grant_ref",
+        "reason_code",
+        "recorded_at",
+        "affected_derived_refs",
+        "propagation_status",
+        "fixture_only"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}
