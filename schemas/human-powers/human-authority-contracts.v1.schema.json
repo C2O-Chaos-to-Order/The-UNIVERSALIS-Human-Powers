@@ -888,6 +888,243 @@
         "fixture_only"
       ],
       "additionalProperties": false
+    },
+    "hardwareControlProfile": {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "const": "1.0.0"
+        },
+        "control_profile_id": {
+          "type": "string"
+        },
+        "device_class": {
+          "enum": [
+            "exoskeleton",
+            "wearable-robotics",
+            "electrical-muscle-stimulation",
+            "supernumerary-robotic-finger",
+            "other"
+          ]
+        },
+        "device_ref": {
+          "type": "string"
+        },
+        "hardware_component_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "control_interface_version": {
+          "type": "string"
+        },
+        "command_schema_ref": {
+          "type": "string"
+        },
+        "parameter_schema_ref": {
+          "type": "string"
+        },
+        "units_profile_ref": {
+          "type": "string"
+        },
+        "failsafe_behavior": {
+          "enum": [
+            "stop-motion",
+            "disable-output",
+            "maintain-safe-state",
+            "operator-takeover"
+          ]
+        },
+        "watchdog_required": {
+          "const": true
+        },
+        "watchdog_profile_ref": {
+          "type": "string"
+        },
+        "hardware_interlock_required": {
+          "const": true
+        },
+        "interlock_test_ref": {
+          "type": "string"
+        },
+        "emergency_stop_command_ref": {
+          "type": "string"
+        },
+        "emergency_stop_test_ref": {
+          "type": "string"
+        },
+        "device_safety_case_ref": {
+          "type": "string"
+        },
+        "calibration_evidence_ref": {
+          "type": "string"
+        },
+        "validated_by_ref": {
+          "type": "string"
+        },
+        "fixture_only": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "schema_version",
+        "control_profile_id",
+        "device_class",
+        "device_ref",
+        "control_interface_version",
+        "command_schema_ref",
+        "parameter_schema_ref",
+        "units_profile_ref",
+        "failsafe_behavior",
+        "watchdog_required",
+        "watchdog_profile_ref",
+        "hardware_interlock_required",
+        "interlock_test_ref",
+        "emergency_stop_command_ref",
+        "emergency_stop_test_ref",
+        "device_safety_case_ref",
+        "calibration_evidence_ref",
+        "validated_by_ref",
+        "fixture_only"
+      ],
+      "additionalProperties": false
+    },
+    "emsActionRecord": {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "const": "1.0.0"
+        },
+        "action_record_id": {
+          "type": "string"
+        },
+        "control_profile_ref": {
+          "type": "string"
+        },
+        "wearer_ref": {
+          "type": "string"
+        },
+        "operator_ref": {
+          "type": "string"
+        },
+        "action_class": {
+          "const": "electrical-muscle-stimulation"
+        },
+        "stimulation_profile_ref": {
+          "type": "string"
+        },
+        "electrode_configuration_ref": {
+          "type": "string"
+        },
+        "parameter_schema_ref": {
+          "type": "string"
+        },
+        "parameter_payload_sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "units_profile_ref": {
+          "type": "string"
+        },
+        "consent_ref": {
+          "type": "string"
+        },
+        "human_approval_ref": {
+          "type": "string"
+        },
+        "device_safety_case_ref": {
+          "type": "string"
+        },
+        "calibration_evidence_ref": {
+          "type": "string"
+        },
+        "hardware_interlock_state": {
+          "enum": [
+            "engaged",
+            "device-authorized",
+            "fault",
+            "unknown"
+          ]
+        },
+        "emergency_stop_available": {
+          "const": true
+        },
+        "emergency_stop_test_ref": {
+          "type": "string"
+        },
+        "decision": {
+          "enum": [
+            "allow",
+            "deny",
+            "human-confirmation-required",
+            "safety-fault"
+          ]
+        },
+        "decision_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "expires_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "fixture_only": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "schema_version",
+        "action_record_id",
+        "control_profile_ref",
+        "wearer_ref",
+        "operator_ref",
+        "action_class",
+        "stimulation_profile_ref",
+        "electrode_configuration_ref",
+        "parameter_schema_ref",
+        "parameter_payload_sha256",
+        "units_profile_ref",
+        "consent_ref",
+        "human_approval_ref",
+        "device_safety_case_ref",
+        "calibration_evidence_ref",
+        "hardware_interlock_state",
+        "emergency_stop_available",
+        "emergency_stop_test_ref",
+        "decision",
+        "decision_at",
+        "expires_at",
+        "fixture_only"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "decision": {
+                "const": "allow"
+              }
+            },
+            "required": [
+              "decision"
+            ]
+          },
+          "then": {
+            "properties": {
+              "hardware_interlock_state": {
+                "enum": [
+                  "engaged",
+                  "device-authorized"
+                ]
+              }
+            },
+            "required": [
+              "human_approval_ref",
+              "hardware_interlock_state"
+            ]
+          }
+        }
+      ],
+      "additionalProperties": false
     }
   },
   "additionalProperties": false
