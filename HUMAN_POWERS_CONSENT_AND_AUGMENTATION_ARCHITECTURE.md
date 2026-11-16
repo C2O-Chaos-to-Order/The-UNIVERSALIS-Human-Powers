@@ -1,8 +1,8 @@
 # Human Powers Consent, Oversight and Augmentation Toolchain — UNIVERSALIS
 
-**Owner:** The UNIVERSALIS Human Powers repository  
-**Boundary:** Public, open, local-first, independently operated  
-**Status:** Portable contract foundation; external integrations and physical-device adapters remain candidates  
+**Owner:** The UNIVERSALIS Human Powers repository
+**Boundary:** Public, open, local-first, independently operated
+**Status:** Portable contract foundation; external integrations and physical-device adapters remain candidates
 **Taxonomy:** Existing `Human_Powers.md` H-P-01–H-P-12 remains canonical and unchanged
 
 ## Architectural position
