@@ -1,0 +1,253 @@
+{
+  "consent_graph": {
+    "schema_version": "1.0.0",
+    "graph_id": "consent-graph-fixture",
+    "profile_version": "1.0.0",
+    "subject_ref": "subject:fixture-01",
+    "grants": [
+      {
+        "grant_id": "grant-human-01",
+        "subject_ref": "subject:fixture-01",
+        "grantor_ref": "principal:fixture-human",
+        "agent_ref": "agent:fixture-01",
+        "action_scope": [
+          "read"
+        ],
+        "resource_scope": [
+          "workspace:demo"
+        ],
+        "purposes": [
+          "summarization"
+        ],
+        "data_categories": [
+          "synthetic-public"
+        ],
+        "recipient_refs": [
+          "agent:fixture-01"
+        ],
+        "mode": "approval-required",
+        "status": "granted",
+        "issued_at": "2026-11-12T16:05:00Z",
+        "expires_at": "2026-11-13T16:05:00Z",
+        "provenance_ref": "fixture://provenance/root"
+      }
+    ],
+    "revoked_grant_refs": [],
+    "join_algebra_ref": "fixture://consent/join-v1",
+    "provenance_root": {
+      "kind": "grant-ref",
+      "grant_ref": "grant-human-01"
+    },
+    "created_at": "2026-11-12T16:05:00Z",
+    "updated_at": "2026-11-12T16:05:00Z",
+    "fixture_only": true
+  },
+  "consent_label_join": {
+    "schema_version": "1.0.0",
+    "algebra_ref": "fixture://join-semilattice-v1",
+    "left_restrictions": [
+      "purpose:research"
+    ],
+    "right_restrictions": [
+      "recipient:agent-01"
+    ],
+    "joined_restrictions": [
+      "purpose:research",
+      "recipient:agent-01"
+    ],
+    "operation": "set-union",
+    "fixture_only": true
+  },
+  "human_approval_receipt": {
+    "schema_version": "1.0.0",
+    "receipt_id": "approval-fixture-01",
+    "approver_ref": "subject:fixture-01",
+    "requesting_agent_ref": "agent:fixture-01",
+    "action": "publish",
+    "target_ref": "artifact:fixture-01",
+    "purpose": "release approved document",
+    "scope": [
+      "artifact:fixture-01"
+    ],
+    "decision": "approve",
+    "evidence_refs": [
+      "fixture://preview/01"
+    ],
+    "issued_at": "2026-11-12T16:05:00Z",
+    "expires_at": "2026-11-12T16:10:00Z",
+    "nonce": "fixture-nonce-01",
+    "signature": {
+      "algorithm": "ML-DSA-65",
+      "signer_key_ref": "fixture://key/not-real",
+      "payload_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "signature_base64": "Zml4dHVyZS1ub3QtYS1yZWFsLXNpZw==",
+      "verified_status": "not-verified"
+    },
+    "fixture_only": true
+  },
+  "accessibility_evidence_pack": {
+    "schema_version": "1.0.0",
+    "pack_id": "a11y-fixture-01",
+    "standard": "WCAG-2.2",
+    "target_level": "AA",
+    "evaluated_subject_ref": "build:fixture-01",
+    "build_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+    "evaluation_methods": [
+      "automated",
+      "manual"
+    ],
+    "criteria": [
+      {
+        "criterion_id": "1.1.1",
+        "outcome": "needs-review",
+        "evidence_refs": [
+          "fixture://scan/01"
+        ],
+        "finding_refs": [
+          "fixture://finding/01"
+        ]
+      }
+    ],
+    "human_review_status": "not-reviewed",
+    "limitations": [
+      "Synthetic record; automated scan is not a conformance determination."
+    ],
+    "assessed_at": "2026-11-12T16:05:00Z",
+    "assessor_ref": "fixture-only",
+    "fixture_only": true
+  },
+  "sovereignty_profile": {
+    "schema_version": "1.0.0",
+    "profile_id": "sovereignty-fixture-01",
+    "subject_ref": "subject:fixture-01",
+    "credential_format": "native-record",
+    "data_control": {
+      "storage_control": "subject-controlled",
+      "portability": true,
+      "deletion_request_supported": true
+    },
+    "consent_graph_ref": "fixture://consent/graph",
+    "privacy_preferences_ref": "fixture://privacy/preferences",
+    "issued_at": "2026-11-12T16:05:00Z",
+    "fixture_only": true,
+    "rights_request_refs": [
+      "fixture://rights/request-01"
+    ],
+    "dsar_profile_ref": "fixture://rights/dsar-profile"
+  },
+  "augmentation_device_profile": {
+    "schema_version": "1.0.0",
+    "device_profile_id": "device-profile-fixture-01",
+    "device_class": "exoskeleton",
+    "device_ref": "fixture://device/not-connected",
+    "control_interface_version": "synthetic-0.0",
+    "validated_safety_case_ref": "fixture://safety-case/not-validated",
+    "calibration_evidence_ref": "fixture://calibration/not-run",
+    "hardware_interlock_required": true,
+    "emergency_stop_test_ref": "fixture://estop/not-run",
+    "allowed_parameter_schema_ref": "fixture://parameters/not-authorized",
+    "validated_by_ref": "fixture-only",
+    "fixture_only": true
+  },
+  "augmentation_action_record": {
+    "schema_version": "1.0.0",
+    "action_record_id": "augmentation-fixture-01",
+    "device_profile_ref": "device-profile-fixture-01",
+    "wearer_ref": "subject:fixture-01",
+    "operator_ref": "operator:fixture-01",
+    "action_class": "grip-assist",
+    "parameter_payload_sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+    "consent_ref": "grant-human-01",
+    "human_approval_ref": "approval-fixture-01",
+    "validated_safety_case_ref": "fixture://safety-case/not-validated",
+    "calibration_evidence_ref": "fixture://calibration/not-run",
+    "hardware_interlock_state": "unknown",
+    "emergency_stop_available": true,
+    "emergency_stop_test_ref": "fixture://estop/not-run",
+    "decision": "deny",
+    "decision_at": "2026-11-12T16:05:00Z",
+    "expires_at": "2026-11-12T16:06:00Z",
+    "fixture_only": true
+  },
+  "consent_revocation_event": {
+    "schema_version": "1.0.0",
+    "revocation_id": "revocation-fixture-01",
+    "grant_ref": "grant-human-01",
+    "reason_code": "subject-withdrawal",
+    "recorded_at": "2026-11-12T16:05:00Z",
+    "affected_derived_refs": [
+      "fixture://derived/01"
+    ],
+    "propagation_status": "pending",
+    "fixture_only": true
+  },
+  "data_subject_rights_request": {
+    "schema_version": "1.0.0",
+    "request_id": "rights-request-fixture-01",
+    "subject_ref": "subject:fixture-01",
+    "request_type": "access",
+    "data_scope": [
+      "synthetic-data:example"
+    ],
+    "submitted_at": "2026-11-12T16:10:00Z",
+    "status": "received",
+    "response_due_at": "2026-11-13T16:10:00Z",
+    "decision_ref": "fixture://rights/decision",
+    "evidence_refs": [
+      "fixture://rights/receipt"
+    ],
+    "limitations": [
+      "Synthetic example only; no legal response or GDPR compliance is asserted."
+    ],
+    "fixture_only": true
+  },
+  "hardware_control_profile": {
+    "schema_version": "1.0.0",
+    "control_profile_id": "control-profile-fixture-01",
+    "device_class": "exoskeleton",
+    "device_ref": "fixture://device/exoskeleton-not-connected",
+    "hardware_component_refs": [
+      "fixture://hardware/controller",
+      "fixture://hardware/actuator"
+    ],
+    "control_interface_version": "synthetic-0.0",
+    "command_schema_ref": "fixture://schema/openexo-command",
+    "parameter_schema_ref": "fixture://schema/command-parameters",
+    "units_profile_ref": "fixture://units/si",
+    "failsafe_behavior": "stop-motion",
+    "watchdog_required": true,
+    "watchdog_profile_ref": "fixture://watchdog/not-run",
+    "hardware_interlock_required": true,
+    "interlock_test_ref": "fixture://interlock/not-run",
+    "emergency_stop_command_ref": "fixture://estop/command",
+    "emergency_stop_test_ref": "fixture://estop/not-run",
+    "device_safety_case_ref": "fixture://safety-case/not-validated",
+    "calibration_evidence_ref": "fixture://calibration/not-run",
+    "validated_by_ref": "fixture-only",
+    "fixture_only": true
+  },
+  "ems_action_record": {
+    "schema_version": "1.0.0",
+    "action_record_id": "ems-action-fixture-01",
+    "control_profile_ref": "control-profile-fixture-01",
+    "wearer_ref": "subject:fixture-01",
+    "operator_ref": "operator:fixture-01",
+    "action_class": "electrical-muscle-stimulation",
+    "stimulation_profile_ref": "fixture://ems/profile-not-validated",
+    "electrode_configuration_ref": "fixture://ems/electrodes-not-validated",
+    "parameter_schema_ref": "fixture://schema/ems-parameters",
+    "parameter_payload_sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+    "units_profile_ref": "fixture://units/ems",
+    "consent_ref": "grant-human-01",
+    "human_approval_ref": "approval-fixture-01",
+    "device_safety_case_ref": "fixture://safety-case/not-validated",
+    "calibration_evidence_ref": "fixture://calibration/not-run",
+    "hardware_interlock_state": "unknown",
+    "emergency_stop_available": true,
+    "emergency_stop_test_ref": "fixture://estop/not-run",
+    "decision": "deny",
+    "decision_at": "2026-11-12T16:15:00Z",
+    "expires_at": "2026-11-12T16:16:00Z",
+    "fixture_only": true
+  }
+}
